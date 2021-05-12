@@ -1,3 +1,4 @@
+const axios = require('axios');
 const express = require('express');
 const app = express();
 
@@ -18,6 +19,14 @@ function isValidEmail(email) {
 
     // [1 ou mais caracteres] @ [1 ou mais caracteres] [1 das 4 opções] [fim da string]
     return email.match(/.+@.+(.com.br|.com|.gov.br|.org)$/) !== null;
+}
+
+async function eva(email) {
+    const request = await axios.get('https://api.eva.pingutil.com/email', {
+        params: {email}
+    });
+
+    return request.data.data;
 }
 
 app.get('/', function (req, res) {
@@ -43,6 +52,20 @@ app.post('/mail/validation/v1', function (req, res) {
             'domain': 'mail',
             'valid_syntax': isValidEmail(email),
         }))
+    ));
+});
+
+app.post('/mail/validation/v3', async function (req, res) {
+    let emails = req.body.email_address;
+
+    if (!Array.isArray(emails)) {
+        emails = [emails];
+    }
+
+    const requests = emails.map(eva);
+
+    res.send(ok(
+        await Promise.all(requests)
     ));
 });
 
