@@ -13,6 +13,7 @@ module.exports = function (sequelize, Sequelize) {
         catch_all: Sequelize.BOOLEAN,
         gibberish: Sequelize.BOOLEAN,
     }, {
-        timestamps: false,
+        createdAt: 'created_at',
+        updatedAt: false,
     });
 };

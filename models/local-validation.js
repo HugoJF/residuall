@@ -4,6 +4,7 @@ module.exports = function (sequelize, Sequelize) {
         domain: Sequelize.STRING,
         valid_syntax: Sequelize.BOOLEAN,
     }, {
-        timestamps: false,
+        createdAt: 'created_at',
+        updatedAt: false,
     });
 };

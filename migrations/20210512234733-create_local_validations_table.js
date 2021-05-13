@@ -12,12 +12,9 @@ module.exports = {
                 type: Sequelize.STRING,
                 unique: true,
             },
-            domain: {
-                type: Sequelize.STRING,
-            },
-            valid_syntax: {
-                type: Sequelize.BOOLEAN,
-            }
+            domain: Sequelize.STRING,
+            valid_syntax: Sequelize.BOOLEAN,
+            created_at: Sequelize.DATE,
         })
     },
 

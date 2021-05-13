@@ -19,6 +19,7 @@ module.exports = {
             deliverable: Sequelize.BOOLEAN,
             catch_all: Sequelize.BOOLEAN,
             gibberish: Sequelize.BOOLEAN,
+            created_at: Sequelize.DATE,
         })
     },
 
